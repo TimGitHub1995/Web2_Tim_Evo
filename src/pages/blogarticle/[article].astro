@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+
+// entry wird übergeben. 
+
+
+// entry enthält alle Infos zu dem Entry - heißt, zum Markdown File, das im Link enthalten ist 
+// der Name ist in der Variablen slug enthalten. (z.B. anonymjson oder markdown)
+// Die Daten oben in den Markdown Files sind in entry.data enthalten. 
+// article enthält den Link 
+// getStaticPath wird zur Generierung der dynamischen Route gebraucht. 
+// https://docs.astro.build/en/reference/api-reference/#getstaticpaths
+
+
+// Neuer Pfad für alle Blogeinträge generieren. 
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => {return {props: { entry }, params: {article: entry.slug}}})
+}
+
+// entry.render nimmt den Inhalt von body (was beim Markdown File der eigentliche Text ist und wandelt es um.)
+const { article } = Astro.params; 
+const { entry } = Astro.props;
+console.log(entry);
+const { Content } = await entry.render();
+
+---
+
+<Layout title={"Blog"}>
+      <div class="mx-auto max-w-3xl mt-14">
+      <h1
+        class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight">
+        {entry.data.title}
+      </h1>
+      <div class="flex mt-3 items-center flex-wrap md:flex-nowrap">
+        <span class="text-gray-400">
+          {entry.data.author}
+        </span>
+        <span class="text-gray-400">•</span>
+        <time
+          class="text-gray-400"
+          datetime={entry.data.publishDate.toISOString()}>
+          {entry.data.publishDate.toDateString()}
+        </time>
+        <span class="text-gray-400 hidden md:block">•</span>
+      </div>
+    </div>
+    <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
+       <Content />
+    </div>
+    <div class="text-center mt-8">
+      <a
+        href="/blog"
+        class="bg-gray-100 px-5 py-3 rounded-md hover:bg-gray-200 transition"
+        >← Back to Blog</a
+      >
+    </div>
+
+</Layout>

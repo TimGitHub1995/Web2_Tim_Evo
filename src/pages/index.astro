@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+import Layout from "@layouts/Layout.astro";
+import coder from "../assets/images/coder.webp"
+---
+
+<Layout title="">
+	<div class:list={["max-w-screen-xl mx-auto px-5"]}>
+		<html lang="en">
+			<div class="grid place-items-center content-center ">
+ 	  			<p class="text-5xl font-extrabold text-blue-800 my-5">Willkommen!</p>
+					<div><Image src={coder} alt="A real coder." width="400"/></div>
+				<p class="text-4xl py-5">Coding is so great!</p>
+			</div>
+		</html>
+	</div>
+</Layout>
+

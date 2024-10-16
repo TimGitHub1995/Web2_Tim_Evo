@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/Layout.astro";
+import SolidPersonRent from "@solid/5_solidPersonRent"
+---
+
+<Layout title="Rent">
+  <section>
+    {/* WICHTIG: Um die Komponente im Client (Browser) nutzen zu können, muss diese 
+                 an den Browser geschickt werden. Dies wird durch client:load ermöglicht.  */}
+    <SolidPersonRent client:load />
+  </section>
+</Layout>

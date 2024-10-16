@@ -1,0 +1,12 @@
+---
+import LayoutApp from "@layouts/LayoutApp.astro";
+import SolidApp from "@solid/13_App"
+---
+
+<LayoutApp title="App">
+  <section>
+    {/* WICHTIG: Um die Komponente im Client (Browser) nutzen zu können, muss diese 
+                 an den Browser geschickt werden. Dies wird durch client:load ermöglicht.  */}
+    <SolidApp client:load />
+  </section>
+</Layout>

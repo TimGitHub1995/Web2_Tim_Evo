@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/Layout.astro";
+import LoginRegister from "@solid/12_LoginRegister"
+---
+
+<Layout title="Rent">
+  <section>
+    {/* WICHTIG: Um die Komponente im Client (Browser) nutzen zu können, muss diese 
+                 an den Browser geschickt werden. Dies wird durch client:load ermöglicht.  */}
+    <LoginRegister client:load />
+  </section>
+</Layout>

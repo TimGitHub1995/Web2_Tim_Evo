@@ -1,0 +1,82 @@
+---
+import { SEO } from "astro-seo";
+import Footer from "@components/footer.astro";
+import Navbar from "@components/navbar.astro";
+
+export interface Props {
+  title: string;
+}
+
+const resolvedImageWithDomain = new URL(
+  "/opengraph.jpg",
+  Astro.site
+).toString();
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const { title } = Astro.props;
+
+const makeTitle = title ? title + " | " + "Web 2" : "Web 2";
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
+    <SEO
+      title={makeTitle}
+      description="Webentwicklung 2 ist nichts für Anfänger."
+      canonical={""}
+      twitter={{
+        creator: "@whity",
+        site: "@web2",
+        card: "summary_large_image",
+      }}
+      openGraph={{
+        basic: {
+          url: "canonicalURL",
+          type: "website",
+          title: `Webentwicklung 2 - eine Nase vorn`,
+          image: resolvedImageWithDomain,
+        },
+        image: {
+          alt: "Web 2",
+        },
+      }}
+    />
+  </head>
+  <body>
+	{/*
+	Outer div:
+        flex-auto: This utility applies Flexbox to the container, enabling auto shrink
+        justify-center: This centers the nested div horizontally within the parent container.
+        items-center: This centers the nested div vertically.
+        min-h-screen: This ensures that the container takes at least the minimum height of the viewport, allowing for true vertical centering.
+
+    Inner div:
+        max-w-xl: This sets the maximum width of the inner div to Tailwind's predefined xl size, which is typically 36rem (or 576px, depending on the configuration).
+        mx-auto: This applies automatic margins on the left and right sides, further ensuring the div is centered horizontally within its parent.
+        p-4: This applies padding inside the div, which provides space around the content inside the div.
+        bg-white: This sets the background color of the div to white.
+        shadow-lg: This applies a large shadow for a 3D effect, making the div visually distinct from the background.
+        rounded: This applies a default border-radius to soften the corners of the div.
+	*/}
+	<div class="flex-auto justify-center items-center min-h-screen">
+		<div class="mx-auto max-w-screen-lg ">
+			<Navbar />
+			<slot />
+			<Footer />
+			<style is:global>
+			/* Improve Page speed */
+			/* https://css-tricks.com/almanac/properties/c/content-visibility/ */
+			img {
+				content-visibility: auto;
+			}
+			</style>
+		</div>
+	</div>
+  </body>
+</html>

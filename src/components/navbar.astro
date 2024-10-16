@@ -1,0 +1,40 @@
+<script>
+    // JavaScript code, um toggle zu Burger Menu zu ermöglichen.
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuButton = document.querySelector('.navbar-start .btn');
+      const dropdownMenu = document.querySelector('.dropdown .dropdown-content');
+  
+      menuButton.addEventListener('click', function () {
+        dropdownMenu.classList.toggle('hidden');
+      });
+    });
+</script>
+
+<div class="navbar bg-base-100">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"> 
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path> 
+          </svg>
+        </label>
+        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ">
+          <li><a href="/index/">Home</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/login/">Login</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <a class="btn btn-ghost normal-case text-xl">Web 2</a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="text-xl menu menu-horizontal p-0">
+        <li><a class="" href="/">Home</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="/login/">Login</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- Content here -->
+

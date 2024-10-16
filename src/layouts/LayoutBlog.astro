@@ -1,0 +1,22 @@
+---
+const {frontmatter} = Astro.props;
+import Layout from "./Layout.astro";
+// In diesem  File kann das Layout für einen Blog angegeben. Werden, beispielsweise könnten
+// Rahmen oder ähnliches oder Schriftarten anders definiert werden. Der Blog wird
+// hier "rein"gerendert. 
+---
+        <div>
+             {/* Tailwind überschreibt alle h1-h4 Eigenschaften, daher werden diese Eigenschaften mit prose wieder eingeführt
+        https://docs.astro.build/en/recipes/tailwind-rendered-markdown/ 
+
+        Die CSS-Klassen Prose verbessern die Lesbarkeit durch Ränder und Designanpassungen. Wenn dies nicht gewünscht wird, 
+        kann das Design angepasst werden. 
+    
+        <div class="mx-auto prose dark:prose-invert prose-h1:font-bold prose-h1:text-xl
+                    prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl">
+    
+       Hier wird der Blogartikel eingefügt */}
+           <slot />
+        </div> 
+</div>
+</html>

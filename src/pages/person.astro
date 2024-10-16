@@ -1,0 +1,42 @@
+---
+import Layout from "@layouts/Layout.astro";
+let persons = [
+        { prename: "Lea", surname: "Maier", age: 23, city: "Weingarten"},
+        { prename: "Leon", surname: "Müller", age: 27 , city: "Ravensburg"},
+        { prename: "Rita", surname: "Kowalski", age: 63 , city: "Mochenwangen"},
+        { prename: "Alina", surname: "Schuster", age: 20 , city: "Blitzenreute"},
+        { prename: "Rudolf", surname: "Sauter", age: 87 , city: "Berg"},
+        { prename: "Miriam", surname: "Kocher", age: 42, city: "Bad Saulgau"},
+        { prename: "Liesl", surname: "Hinterhuber", age: 87, city: "Wangen"},
+        { prename: "Fritz", surname: "Amann", age: 55 , city: "Bergatreute"},
+        { prename: "Lina", surname: "Boni", age: 18 , city: "Hinzistobel"},
+        { prename: "Kirsten", surname: "Krizcik", age: 29, city: "Ravensburg"},
+        { prename: "Kirsten", surname: "Müller", age: 30, city: "Weingarten"}
+    ]
+---
+
+<Layout title="Persons">
+  <section class="grid py-10">
+    <h1 class="text-4xl text-amber-500">Web2 Template</h1>
+    <p class="text-xl py-4">Web2: Wir bauen schon mal mit dem Backend eine Seite mit Personen.</p>
+    <table class="w-full table">
+      <thead>
+        <tr>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Stadt</th>
+          <th>Alter</th>  
+        </tr>
+      </thead>
+      <tbody>
+       { persons.map((person) => 
+          <tr>
+            <td>{ person.prename.toUpperCase() }</td>
+            <td>{ person.surname }</td>
+            <td>{ person.city }</td>
+            <td>{ person.age }</td>
+          </tr>)}
+      </tbody>
+  </table>
+  </section>
+</Layout>

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "types": ["@astrojs/image/client"],
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@content/*": ["src/content/*"],
+      "@images/*": ["src/images/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@solid/*": ["src/components/solid/*"],
+      "@utils/*": ["src/utils/*"],
+    },
+  }
+}

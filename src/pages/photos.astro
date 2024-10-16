@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import Layout from "@layouts/Layout.astro";
+import coder from "../assets/images/coder.webp"
+import designer from "../assets/images/designer.webp"
+---
+
+<Layout title="">
+	<div class:list={["max-w-screen-xl mx-auto px-5"]}>
+		<html lang="en">
+			<div class="grid place-items-center content-center ">
+ 	  			<p class="text-5xl font-extrabold text-teal-600 my-20">Photo Gallery</p>
+				<p class="text-4xl py-20">Coding is so great!</p>
+			</div>
+			<div class="grid grid-rows-1 gap-4">
+				<div><Image class="px-10" src={coder} alt="A real coder." width="200"/></div>
+				<div><Image class="px-10" src={designer} alt="A real designer." width="200"/></div>
+   		  </div>
+			</html>
+	</div>
+</Layout>
+

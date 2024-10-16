@@ -1,0 +1,13 @@
+---
+import Layout from "@layouts/Layout.astro";
+import SolidUiElement from "@components/solid/1_solidUiElements"
+---
+
+<Layout title="Web2">
+  <section class="grid py-10 place-items-center text-center">
+    <h1 class="sm:text-4xl text-3xl font-bold mb-6 dark:text-white">Web2 Template</h1>
+    {/* WICHTIG: Um die Komponente im Client (Browser) nutzen zu können, muss diese 
+                 an den Browser geschickt werden. Dies wird durch client:load ermöglicht.  */}
+    <SolidUiElement client:load />
+  </section>
+</Layout>

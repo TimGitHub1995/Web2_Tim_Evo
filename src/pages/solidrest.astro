@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/Layout.astro";
+import SolidPerson from "@components/solid/2_solidPersonSimple"
+---
+
+<Layout title="Web2">
+  <section>
+    {/* WICHTIG: Um die Komponente im Client (Browser) nutzen zu können, muss diese 
+                 an den Browser geschickt werden. Dies wird durch client:load ermöglicht.  */}
+    <SolidPerson client:load />
+  </section>
+</Layout>
