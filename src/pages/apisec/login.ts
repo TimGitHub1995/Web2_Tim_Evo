@@ -4,7 +4,7 @@ import * as path from 'path';
 import jwt from 'jsonwebtoken';
 import config  from '@utils/config'
 
-const dbPath = path.resolve("./src/database/", 'database.db');
+const dbPath = path.resolve("./src/database/", 'hoki_DB.db');
 console.log(dbPath);
 
 export const POST: APIRoute = async ({ request }) => {

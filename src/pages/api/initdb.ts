@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import sqlite from 'better-sqlite3';
 import * as path from 'path';
 
-const dbPath = path.resolve("./src/database/", "database.db");
+const dbPath = path.resolve("./src/database/", "hoki_DB.db");
 console.log(dbPath);
 
 export const GET: APIRoute = ({ params, request }) => {

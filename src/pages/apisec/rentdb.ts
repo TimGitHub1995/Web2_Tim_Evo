@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { authenticateToken } from '@utils/authentication';
 
 
-const dbPath = path.resolve("./src/database/", 'database.db');
+const dbPath = path.resolve("./src/database/", 'hoki_DB.db');
 console.log(dbPath);
 
 export const GET: APIRoute = async ({ params, request }) => {

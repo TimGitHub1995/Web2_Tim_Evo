@@ -14,7 +14,7 @@ export default function SolidItemRent(props) {
 
   const fetchItemRessource = async() => {
     let token =  localStorage.getItem("token"); 
-    let data = await fetch(baseUrl, {method: 'GET'}, headers: {authorization: "Bearer " + token }});
+    let data = await fetch(baseUrl, {method: 'GET', headers: {authorization: "Bearer " + token }});
     let json = await data.json(); 
     return json.items;
   }
@@ -25,7 +25,7 @@ export default function SolidItemRent(props) {
     let token =  localStorage.getItem("token"); 
     const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', authorization: "Bearer " + token } },
+        headers: { 'Content-Type': 'application/json', authorization: "Bearer " + token } ,
         body: JSON.stringify({ id: item.id, name: item.name, category: item.category, isAvailable: available })
     };
     let data = await fetch(baseUrl, requestOptions);

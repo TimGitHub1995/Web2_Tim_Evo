@@ -4,7 +4,7 @@ import * as path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { writeFile } from 'fs/promises';
 
-const dbPath = path.resolve("./src/database/", 'database.db');
+const dbPath = path.resolve("./src/database/", 'hoki_DB.db');
 const imgPath = path.resolve("./public/images/items");
 
 function getFileSuffix(filename) {

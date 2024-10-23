@@ -8,7 +8,7 @@ import { Component, createSignal, Show, onMount } from "solid-js";
 // werden --> hier in solid.astro. Zur Visualisierung des dynamischen Bereichs wurde
 // ein Border eingefügt. 
 export default function SolidUiElement(props) {
-    // States speicherm Zustände in Form von Variablen. 
+    // States speichern Zustände in Form von Variablen. 
     // diese Variablen können durch Aufruf der ersten Funktion ausgelesen werden 
     // Beispiel noClicks() liefert den gespeicherten Integer des Zustandes. 
     // setNoClicks wird zum Setzen benötigt. 
