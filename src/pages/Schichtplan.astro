@@ -1,60 +1,39 @@
 ---
-import { getCollection } from "astro:content";
-import { Image } from 'astro:assets';
 import Layout from "@layouts/Layout.astro";
+import { fetchShiftData } from "../utils/fetchShiftData.js";
 
-// Alle Assets aus content/blog laden. 
-// alle aussortieren, die noch nicht veröffentlicht werden sollen. 
-const publishedBlogEntries = await getCollection("blog", ({ data }) => {
-  return data.publish && data.publishDate < new Date();
-});
-
-// Nach Datum sortieren
-publishedBlogEntries.sort(function (a, b) {
-  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
-});
+// Daten aus der Datenbank abrufen
+const shiftData = await fetchShiftData();
 ---
 
-<Layout title="Blog">
-    <main class="mt-16">
-      <ul class="grid gap-16 max-w-4xl mx-auto">
-        {
-          publishedBlogEntries.map((blogPostEntry, index) => (
-            <li>
-              <a href={`/blogarticle/${blogPostEntry.slug}`}>
-                <div class="grid md:grid-cols-2 gap-5 md:gap-10 items-center">
-                <Image
-                    src={"/images/" + blogPostEntry.data.image.src }
-                    alt={blogPostEntry.data.image.alt}
-                    sizes="(max-width: 800px) 100vw, 800px"
-                    width="200"
-                    height="355"
-                    loading={index <= 2 ? "eager" : "lazy"}
-                    decoding={index <= 2 ? "sync" : "async"}
-                    class="w-full rounded-md"
-                 /> 
-                  <div>
-                    <h2 class="text-3xl font-semibold leading-snug tracking-tight mt-1 ">
-                      {blogPostEntry.data.title}
-                    </h2>
-
-                    <div class="flex gap-2 mt-3">
-                      <span class="text-gray-400">
-                        {blogPostEntry.data.author}
-                      </span>
-                      <span class="text-gray-400">• </span>
-                      <time
-                        class="text-gray-400"
-                        datetime={blogPostEntry.data.publishDate.toISOString()}>
-                        {blogPostEntry.data.publishDate.toDateString()}
-                      </time>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </main>
+<Layout title="Schichtplan">
+  <main class="mt-16">
+    <h1 class="text-4xl font-bold text-center mb-8">Schichtplan</h1>
+    <div class="overflow-x-auto max-w-4xl mx-auto">
+      <table class="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
+        <thead>
+          <tr class="bg-grey-100 text-left">
+            <th class="p-4 border-b font-semibold">Name</th>
+            <th class="p-4 border-b font-semibold">Vorname</th>
+            <th class="p-4 border-b font-semibold">Universität</th>
+            <th class="p-4 border-b font-semibold">Arbeitstag</th>
+            <th class="p-4 border-b font-semibold">Aktion</th>
+          </tr>
+        </thead>
+        <tbody>
+          {shiftData.map((shift, index) => (
+            <tr class={index % 2 === 0 ? "bg-gray-200" : "bg-grey-100"}>
+              <td class="p-4 border-b">{shift.name}</td>
+              <td class="p-4 border-b">{shift.vorname}</td>
+              <td class="p-4 border-b">{shift.universität}</td>
+              <td class="p-4 border-b">{shift.arbeitstag}</td>
+              <td class="p-4 border-b">
+                <button class="btn btn-primary text-white bg-red-700">Bearbeiten</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </main>
 </Layout>
