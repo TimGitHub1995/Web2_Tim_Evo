@@ -2,8 +2,34 @@
 import Layout from "@layouts/Layout.astro";
 import { fetchShiftData } from "../utils/fetchShiftData.js";
 
-// Daten aus der Datenbank abrufen
 const shiftData = await fetchShiftData();
+
+let nachname = "";
+let vorname = "";
+let universität = "";
+let arbeitstag = "";
+
+async function handleEdit(schicht_id) {
+  const response = await fetch('/api/updateShift', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ schicht_id, nachname, vorname, universität, arbeitstag }),
+  });
+  if (response.ok) {
+    location.reload(); // Seite aktualisieren, um die Änderungen anzuzeigen
+  }
+}
+
+async function handleCreate() {
+  const response = await fetch('/api/createShift', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nachname, vorname, universität, arbeitstag }),
+  });
+  if (response.ok) {
+    location.reload();
+  }
+}
 ---
 
 <Layout title="Schichtplan">
@@ -12,7 +38,7 @@ const shiftData = await fetchShiftData();
     <div class="overflow-x-auto max-w-4xl mx-auto">
       <table class="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
         <thead>
-          <tr class="bg-grey-100 text-left">
+          <tr class="bg-grey-100 text-center">
             <th class="p-4 border-b font-semibold">Name</th>
             <th class="p-4 border-b font-semibold">Vorname</th>
             <th class="p-4 border-b font-semibold">Universität</th>
@@ -23,17 +49,27 @@ const shiftData = await fetchShiftData();
         <tbody>
           {shiftData.map((shift, index) => (
             <tr class={index % 2 === 0 ? "bg-gray-200" : "bg-grey-100"}>
-              <td class="p-4 border-b">{shift.name}</td>
-              <td class="p-4 border-b">{shift.vorname}</td>
-              <td class="p-4 border-b">{shift.universität}</td>
-              <td class="p-4 border-b">{shift.arbeitstag}</td>
-              <td class="p-4 border-b">
-                <button class="btn btn-primary text-white bg-red-700">Bearbeiten</button>
+              <td class="p-4 border-b text-center">{shift.nachname}</td>
+              <td class="p-4 border-b text-center">{shift.vorname}</td>
+              <td class="p-4 border-b text-center">{shift.universität}</td>
+              <td class="p-4 border-b text-center">{shift.arbeitstag}</td>
+              <td class="p-4 border-b text-center">
+                <button onclick={`handleEdit(${shift.schicht_id})`} class="btn btn-neutral text-white bg-green-500 border-none">Bearbeiten</button>
+                <button onclick={`handleDelete(${shift.schicht_id})`} class="btn btn-neutral text-white bg-red-500 border-none ml-2">Löschen</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <!-- Eingabefelder für neue Schicht -->
+      <div class="mt-8 text-center">
+        <input type="text" placeholder="Nachname" bind:value={nachname} class="p-2 border border-gray-300 rounded mb-2" />
+        <input type="text" placeholder="Vorname" bind:value={vorname} class="p-2 border border-gray-300 rounded mb-2" />
+        <input type="text" placeholder="Universität" bind:value={universität} class="p-2 border border-gray-300 rounded mb-2" />
+        <input type="text" placeholder="Arbeitstag" bind:value={arbeitstag} class="p-2 border border-gray-300 rounded mb-2" />
+        <button onclick={handleCreate} class="btn btn-warning mt-2">Neue Schicht hinzufügen</button>
+      </div>
     </div>
   </main>
 </Layout>
